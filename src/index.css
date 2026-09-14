@@ -404,6 +404,7 @@ section { padding: 120px 0; }
 .badge-seo { background: rgba(20, 184, 166, 0.12); color: var(--accent); border: 1px solid rgba(20, 184, 166, 0.22); }
 .badge-wp { background: rgba(56, 189, 248, 0.12); color: var(--accent-2); border: 1px solid rgba(56, 189, 248, 0.22); }
 .badge-custom { background: rgba(56, 189, 248, 0.12); color: var(--primary); border: 1px solid rgba(56, 189, 248, 0.22); }
+.badge-smm { background: rgba(168, 85, 247, 0.12); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.22); }
 
 .timeline {
   position: relative;

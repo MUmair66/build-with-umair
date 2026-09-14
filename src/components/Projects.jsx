@@ -10,7 +10,9 @@ import {
   Sparkles,
   Star,
   TrendingUp,
+  Share2,
 } from 'lucide-react';
+
 
 const PROJECTS = [
   {
@@ -120,21 +122,141 @@ const PROJECTS = [
     highlights: ['GSC monitoring', 'Mobile optimization', 'Site speed fix'],
     accent: '#14b8a6',
   },
+  {
+    num: '09',
+    title: 'elitemoversmuscat.com',
+    category: 'SEO',
+    description: 'Targeted SEO campaigns and local optimization to boost visibility for moving services in Muscat.',
+    tags: ['Local SEO', 'Keyword Targeting', 'GMB', 'Traffic Growth'],
+    result: 'Top Local Rankings',
+    resultIcon: TrendingUp,
+    stat1: { label: 'Local Search', value: '+200%' },
+    stat2: { label: 'Leads', value: '+150%' },
+    highlights: ['GMB Optimization', 'Local Citations', 'Service Page SEO'],
+    accent: '#14b8a6',
+  },
+  {
+    num: '10',
+    title: 'fumoretail.com',
+    category: 'SEO',
+    description: 'Ecommerce SEO strategies focused on product visibility, technical health, and organic traffic acquisition.',
+    tags: ['Ecommerce SEO', 'Technical', 'Content', 'Ranking'],
+    result: 'Increased Sales Organic',
+    resultIcon: TrendingUp,
+    stat1: { label: 'Organic Traffic', value: '+180%' },
+    stat2: { label: 'Revenue Growth', value: '+120%' },
+    highlights: ['Product Schema', 'Category SEO', 'Speed Optimization'],
+    accent: '#14b8a6',
+  },
+  {
+    num: '11',
+    title: 'Letsfixx.com',
+    category: 'WordPress',
+    description: 'WordPress design and development for a service portal, focusing on user experience and lead generation.',
+    tags: ['WordPress', 'UI/UX', 'Service Portal', 'Lead Gen'],
+    result: 'High Conversion Rate',
+    resultIcon: Star,
+    stat1: { label: 'Conversion', value: '+45%' },
+    stat2: { label: 'Load Time', value: '<2s' },
+    highlights: ['Custom Design', 'Lead Capture', 'Fast Performance'],
+    accent: '#22c55e',
+  },
+  {
+    num: '12',
+    title: 'techmateconstruction.com',
+    category: 'WordPress',
+    description: 'Professional WordPress website built for a construction firm to showcase their portfolio and services.',
+    tags: ['WordPress', 'Portfolio', 'Corporate', 'Responsive'],
+    result: 'Premium Brand Image',
+    resultIcon: CheckCircle,
+    stat1: { label: 'Uptime', value: '99.9%' },
+    stat2: { label: 'Mobile Score', value: '98/100' },
+    highlights: ['Portfolio Showcase', 'Mobile Responsive', 'SEO Ready'],
+    accent: '#22c55e',
+  },
+  {
+    num: '13',
+    title: 'actroofingok.com',
+    category: 'WordPress',
+    description: 'Responsive and robust WordPress site designed for a roofing company to capture leads and present services effectively.',
+    tags: ['WordPress', 'Local Business', 'Responsive', 'Speed'],
+    result: 'Enhanced Local Presence',
+    resultIcon: Star,
+    stat1: { label: 'Bounce Rate', value: '-30%' },
+    stat2: { label: 'Leads', value: '+50%' },
+    highlights: ['Local SEO Ready', 'Fast Loading', 'Clear CTA'],
+    accent: '#22c55e',
+  },
+  {
+    num: '14',
+    title: 'qodeclicks.com',
+    category: 'Custom',
+    description: 'Modern and blazing fast website built using Next.js to deliver top-tier performance and SEO benefits.',
+    tags: ['Next.js', 'React', 'Tailwind', 'Performance'],
+    result: 'Next-Gen Performance',
+    resultIcon: CheckCircle,
+    stat1: { label: 'Lighthouse', value: '100' },
+    stat2: { label: 'SEO', value: '100' },
+    highlights: ['Next.js App Router', 'Server Components', 'Optimized Images'],
+    accent: '#38bdf8',
+  },
+  {
+    num: '15',
+    title: 'crabapplemc.com',
+    category: 'Social Media',
+    description: 'Comprehensive social media marketing campaign to build brand awareness and engage with the community.',
+    tags: ['SMM', 'Brand Awareness', 'Engagement', 'Content'],
+    result: 'High Engagement Rate',
+    resultIcon: TrendingUp,
+    stat1: { label: 'Followers', value: '+5k' },
+    stat2: { label: 'Engagement', value: '+300%' },
+    highlights: ['Content Strategy', 'Community Management', 'Ad Campaigns'],
+    accent: '#a855f7',
+  },
+  {
+    num: '16',
+    title: 'drmcheema.com',
+    category: 'Social Media',
+    description: 'Strategic social media management and content creation for a medical professional to establish authority.',
+    tags: ['SMM', 'Healthcare', 'Content Strategy', 'Authority'],
+    result: 'Established Presence',
+    resultIcon: Star,
+    stat1: { label: 'Reach', value: '+10k/mo' },
+    stat2: { label: 'Profile Visits', value: '+150%' },
+    highlights: ['Educational Content', 'Patient Engagement', 'Brand Authority'],
+    accent: '#a855f7',
+  },
+  {
+    num: '17',
+    title: 'eclatmedicalaesthetics.com',
+    category: 'Social Media',
+    description: 'Visually driven social media marketing for an aesthetics brand to highlight services and attract clients.',
+    tags: ['SMM', 'Aesthetics', 'Visual Content', 'Leads'],
+    result: 'Increased Bookings',
+    resultIcon: TrendingUp,
+    stat1: { label: 'Leads Gen', value: '+40%' },
+    stat2: { label: 'Engagement', value: '+250%' },
+    highlights: ['Visual Storytelling', 'Promo Campaigns', 'Client Conversion'],
+    accent: '#a855f7',
+  }
 ];
 
-const FILTERS = ['All', 'SEO', 'WordPress', 'Custom'];
+const FILTERS = ['All', 'SEO', 'WordPress', 'Custom', 'Social Media'];
 
 const catIcon = (category) => {
   if (category === 'SEO') return <Search size={18} />;
   if (category === 'WordPress') return <Globe size={18} />;
+  if (category === 'Social Media') return <Share2 size={18} />;
   return <Code2 size={18} />;
 };
 
 const catBadge = (category) => {
   if (category === 'SEO') return 'project-badge badge-seo';
   if (category === 'WordPress') return 'project-badge badge-wp';
+  if (category === 'Social Media') return 'project-badge badge-smm';
   return 'project-badge badge-custom';
 };
+
 
 const ProjectCard = ({ project, index }) => {
   const [hovered, setHovered] = useState(false);
