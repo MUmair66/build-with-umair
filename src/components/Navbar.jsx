@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { EASE } from './ui';
 
 const NAV_LINKS = [
   { name: 'Home', href: '#home' },
@@ -10,19 +11,50 @@ const NAV_LINKS = [
   { name: 'Contact', href: '#contact' },
 ];
 
+export function LogoMark({ size = 38 }) {
+  const id = useId().replace(/:/g, '');
+  return (
+    <svg className="brand-mark" width={size} height={size} viewBox="0 0 42 42" aria-hidden="true">
+      <defs>
+        <linearGradient id={`lg${id}`} x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#4f46e5" />
+          <stop offset="1" stopColor="#0d9488" />
+        </linearGradient>
+      </defs>
+      <rect width="42" height="42" rx="12" fill={`url(#lg${id})`} />
+      <g fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+        <path className="brand-stroke" d="M8 29V13l6 8 6-8v16" />
+        <path className="brand-stroke" d="M24 13v10a5 5 0 0 0 10 0V13" />
+      </g>
+    </svg>
+  );
+}
+
+export function Brand() {
+  return (
+    <a href="#home" className="brand" aria-label="Umair Yaqoob — home">
+      <LogoMark />
+      <span className="brand-name">
+        Umair Yaqoob<span>.</span>
+      </span>
+    </a>
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState('Home');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((link) => document.getElementById(link.href.replace('#', '')));
+    const sections = NAV_LINKS.map((link) => document.getElementById(link.href.slice(1)));
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -32,182 +64,83 @@ export default function Navbar() {
           }
         });
       },
-      { rootMargin: '-30% 0px -60% 0px' },
+      { rootMargin: '-40% 0px -55% 0px' },
     );
-
     sections.forEach((section) => section && observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          zIndex: 100,
-          transition: 'all 0.4s cubic-bezier(0.4,0,0.2,1)',
-          padding: scrolled ? '0.3rem 0' : '0.55rem 0',
-          background: scrolled ? 'rgba(7,17,26,0.82)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(148,163,184,0.08)' : 'none',
-        }}
-      >
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <a href="#home" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-            <img
-              src="/umairlogoportfolio.png"
-              alt="Umair Portfolio Logo"
-              style={{
-                height: '88px',
-                width: 'auto',
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 0 10px rgba(56,189,248,0.3))',
-                transition: 'filter 0.3s ease',
-              }}
-              onMouseEnter={(event) => {
-                event.currentTarget.style.filter = 'drop-shadow(0 0 16px rgba(56,189,248,0.55))';
-              }}
-              onMouseLeave={(event) => {
-                event.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(56,189,248,0.3))';
-              }}
-            />
-          </a>
+    <motion.nav
+      className={`nav ${scrolled || isOpen ? 'scrolled' : ''}`}
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: EASE }}
+    >
+      <div className="container nav-inner">
+        <Brand />
 
-          <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                style={{
-                  padding: '0.55rem 1rem',
-                  borderRadius: '999px',
-                  fontSize: '0.9rem',
-                  fontWeight: active === link.name ? 700 : 500,
-                  color: active === link.name ? 'var(--text)' : 'var(--text-muted)',
-                  background: active === link.name ? 'rgba(56,189,248,0.1)' : 'transparent',
-                  border: active === link.name ? '1px solid rgba(56,189,248,0.18)' : '1px solid transparent',
-                  textDecoration: 'none',
-                  transition: 'all 0.25s',
-                  position: 'relative',
-                }}
-                onMouseEnter={(event) => {
-                  if (active !== link.name) {
-                    event.currentTarget.style.color = 'var(--text)';
-                    event.currentTarget.style.background = 'rgba(148,163,184,0.08)';
-                  }
-                }}
-                onMouseLeave={(event) => {
-                  if (active !== link.name) {
-                    event.currentTarget.style.color = 'var(--text-muted)';
-                    event.currentTarget.style.background = 'transparent';
-                  }
-                }}
-              >
-                {link.name}
-                {active === link.name && (
-                  <motion.span
-                    layoutId="nav-indicator"
-                    style={{
-                      position: 'absolute',
-                      bottom: -2,
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      width: 4,
-                      height: 4,
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-                      boxShadow: '0 0 6px rgba(56,189,248,0.8)',
-                    }}
-                  />
-                )}
-              </a>
-            ))}
-          </div>
-
-          <div className="desktop-cta" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <a href="#contact" className="btn btn-primary" style={{ padding: '0.65rem 1.5rem', fontSize: '0.875rem' }}>
-              Hire Me <ArrowUpRight size={16} />
+        <div className="nav-links">
+          {NAV_LINKS.map((link) => (
+            <a key={link.name} href={link.href} className={`nav-link ${active === link.name ? 'active' : ''}`}>
+              {active === link.name && (
+                <motion.span layoutId="nav-pill" className="nav-pill" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />
+              )}
+              {link.name}
             </a>
-          </div>
-
-          <button
-            onClick={() => setIsOpen((value) => !value)}
-            className="mobile-burger"
-            style={{
-              background: 'rgba(15,23,35,0.8)',
-              border: '1px solid rgba(148,163,184,0.14)',
-              borderRadius: '0.8rem',
-              width: 42,
-              height: 42,
-              display: 'none',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              color: 'var(--text)',
-            }}
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          ))}
         </div>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              style={{
-                overflow: 'hidden',
-                borderTop: '1px solid rgba(148,163,184,0.08)',
-                background: 'rgba(7,17,26,0.96)',
-                backdropFilter: 'blur(20px)',
-              }}
-            >
-              <div className="container" style={{ padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {NAV_LINKS.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    style={{
-                      padding: '0.9rem 1rem',
-                      borderRadius: '0.85rem',
-                      fontSize: '1rem',
-                      fontWeight: 600,
-                      color: active === link.name ? 'var(--primary)' : 'var(--text-muted)',
-                      background: active === link.name ? 'rgba(56,189,248,0.08)' : 'transparent',
-                      textDecoration: 'none',
-                      border: '1px solid',
-                      borderColor: active === link.name ? 'rgba(56,189,248,0.2)' : 'transparent',
-                      transition: 'all 0.2s',
-                    }}
-                  >
-                    {link.name}
-                  </a>
-                ))}
-                <a href="#contact" onClick={() => setIsOpen(false)} className="btn btn-primary" style={{ justifyContent: 'center', marginTop: '0.5rem' }}>
-                  Hire Me
-                </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
+        <a href="#contact" className="btn btn-primary btn-sm nav-cta">
+          Hire Me <ArrowUpRight size={16} className="arrow" />
+        </a>
 
-      <style>{`
-        @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
-          .desktop-cta { display: none !important; }
-          .mobile-burger { display: flex !important; }
-        }
-      `}</style>
-    </>
+        <button className="nav-burger" aria-label={isOpen ? 'Close menu' : 'Open menu'} aria-expanded={isOpen} onClick={() => setIsOpen((v) => !v)}>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={isOpen ? 'x' : 'menu'}
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              style={{ display: 'grid' }}
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </motion.span>
+          </AnimatePresence>
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="mobile-menu"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: EASE }}
+          >
+            <div className="mobile-menu-inner">
+              {NAV_LINKS.map((link, i) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`mobile-link ${active === link.name ? 'active' : ''}`}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 * i, duration: 0.35, ease: EASE }}
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+              <a href="#contact" onClick={() => setIsOpen(false)} className="btn btn-primary" style={{ marginTop: 8 }}>
+                Hire Me <ArrowUpRight size={16} />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }
