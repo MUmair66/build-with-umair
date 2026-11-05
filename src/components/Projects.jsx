@@ -200,48 +200,9 @@ const PROJECTS = [
     highlights: ['Next.js App Router', 'Server Components', 'Optimized Images'],
     accent: '#38bdf8',
   },
-  {
-    num: '15',
-    title: 'crabapplemc.com',
-    category: 'Social Media',
-    description: 'Comprehensive social media marketing campaign to build brand awareness and engage with the community.',
-    tags: ['SMM', 'Brand Awareness', 'Engagement', 'Content'],
-    result: 'High Engagement Rate',
-    resultIcon: TrendingUp,
-    stat1: { label: 'Followers', value: '+5k' },
-    stat2: { label: 'Engagement', value: '+300%' },
-    highlights: ['Content Strategy', 'Community Management', 'Ad Campaigns'],
-    accent: '#a855f7',
-  },
-  {
-    num: '16',
-    title: 'drmcheema.com',
-    category: 'Social Media',
-    description: 'Strategic social media management and content creation for a medical professional to establish authority.',
-    tags: ['SMM', 'Healthcare', 'Content Strategy', 'Authority'],
-    result: 'Established Presence',
-    resultIcon: Star,
-    stat1: { label: 'Reach', value: '+10k/mo' },
-    stat2: { label: 'Profile Visits', value: '+150%' },
-    highlights: ['Educational Content', 'Patient Engagement', 'Brand Authority'],
-    accent: '#a855f7',
-  },
-  {
-    num: '17',
-    title: 'eclatmedicalaesthetics.com',
-    category: 'Social Media',
-    description: 'Visually driven social media marketing for an aesthetics brand to highlight services and attract clients.',
-    tags: ['SMM', 'Aesthetics', 'Visual Content', 'Leads'],
-    result: 'Increased Bookings',
-    resultIcon: TrendingUp,
-    stat1: { label: 'Leads Gen', value: '+40%' },
-    stat2: { label: 'Engagement', value: '+250%' },
-    highlights: ['Visual Storytelling', 'Promo Campaigns', 'Client Conversion'],
-    accent: '#a855f7',
-  }
 ];
 
-const FILTERS = ['All', 'SEO', 'WordPress', 'Custom', 'Social Media'];
+const FILTERS = ['All', 'SEO', 'WordPress', 'Custom'];
 
 const catIcon = (category) => {
   if (category === 'SEO') return <Search size={18} />;
