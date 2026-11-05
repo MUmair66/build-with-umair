@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { animate, motion, useInView } from 'framer-motion';
 
 export const EASE = [0.22, 1, 0.36, 1];
+export const EMAIL = 'umairyaqoob265@gmail.com';
 
 /** Fades + slides children in when they enter the viewport. */
 export function Reveal({ children, delay = 0, y = 28, className, style, as = 'div' }) {

@@ -17,8 +17,8 @@ export function LogoMark({ size = 38 }) {
     <svg className="brand-mark" width={size} height={size} viewBox="0 0 42 42" aria-hidden="true">
       <defs>
         <linearGradient id={`lg${id}`} x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#4f46e5" />
-          <stop offset="1" stopColor="#0d9488" />
+          <stop offset="0" stopColor="#ff8a3d" />
+          <stop offset="1" stopColor="#e2530a" />
         </linearGradient>
       </defs>
       <rect width="42" height="42" rx="12" fill={`url(#lg${id})`} />
@@ -35,7 +35,7 @@ export function Brand() {
     <a href="#home" className="brand" aria-label="Umair Yaqoob — home">
       <LogoMark />
       <span className="brand-name">
-        Umair Yaqoob<span>.</span>
+        Umair <span>Yaqoob.</span>
       </span>
     </a>
   );

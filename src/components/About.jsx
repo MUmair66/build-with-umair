@@ -20,32 +20,32 @@ const tools = [
 const services = [
   {
     icon: Code2,
-    color: '#4f46e5',
-    bg: '#eef0ff',
+    color: '#ff6b1a',
+    bg: 'rgba(0,0,0,.35)',
     title: 'Full Stack Web Development',
     desc: 'Fast, scalable websites and apps built with modern tooling and a close eye on usability.',
     points: ['Custom React applications', 'Node.js backend solutions', 'MongoDB integration', 'Responsive UI systems'],
   },
   {
     icon: Search,
-    color: '#0d9488',
-    bg: '#e6faf6',
+    color: '#ff6b1a',
+    bg: 'rgba(0,0,0,.35)',
     title: 'SEO Optimization & Strategy',
     desc: 'Practical SEO execution across technical audits, content direction, and search visibility improvements.',
     points: ['Technical SEO audits', 'Keyword research', 'Backlink strategy', 'Competitor analysis'],
   },
   {
     icon: Globe,
-    color: '#2563eb',
-    bg: '#eaf1ff',
+    color: '#ff6b1a',
+    bg: 'rgba(0,0,0,.35)',
     title: 'WordPress Development',
     desc: 'Custom WordPress builds and improvements that are easier to manage, faster to load, and better to rank.',
     points: ['Custom theme development', 'Performance optimization', 'Plugin management', 'Security and maintenance'],
   },
   {
     icon: TrendingUp,
-    color: '#7c3aed',
-    bg: '#f3edff',
+    color: '#ff6b1a',
+    bg: 'rgba(0,0,0,.35)',
     title: 'Business Website Solutions',
     desc: 'Web solutions focused on cleaner structure, stronger presentation, and better digital credibility.',
     points: ['Business website revamps', 'Service page structure', 'Lead-focused layouts', 'Performance optimization'],
@@ -167,7 +167,7 @@ export default function About() {
 
             <div className="mini-stats">
               {miniStats.map(({ icon: Icon, val, lbl }) => (
-                <div key={lbl} className="mini-stat">
+                <div key={lbl} className="card mini-stat">
                   <span className="icon-box"><Icon size={19} /></span>
                   <div>
                     <div className="stat-value"><Counter value={val} /></div>

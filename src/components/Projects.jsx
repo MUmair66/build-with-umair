@@ -259,10 +259,10 @@ const PROJECTS = [
 const FILTERS = ['All', 'SEO', 'WordPress', 'Custom'];
 
 const CATEGORY = {
-  SEO: { icon: Search, color: '#0d9488', bg: '#e6faf6' },
-  WordPress: { icon: Globe, color: '#2563eb', bg: '#eaf1ff' },
-  Custom: { icon: Code2, color: '#4f46e5', bg: '#eef0ff' },
-  'Social Media': { icon: Share2, color: '#7c3aed', bg: '#f3edff' },
+  SEO: { icon: Search, color: '#ff6b1a', bg: 'rgba(0,0,0,.35)' },
+  WordPress: { icon: Globe, color: '#ff6b1a', bg: 'rgba(0,0,0,.35)' },
+  Custom: { icon: Code2, color: '#ff6b1a', bg: 'rgba(0,0,0,.35)' },
+  'Social Media': { icon: Share2, color: '#ff6b1a', bg: 'rgba(0,0,0,.35)' },
 };
 
 const siteUrl = (title) => (/^[\w-]+(\.[\w-]+)+$/.test(title) ? `https://${title.toLowerCase()}` : null);
@@ -416,7 +416,7 @@ export default function Projects() {
           </motion.div>
         )}
 
-        <Reveal className="summary">
+        <Reveal className="card summary">
           {[
             { icon: BarChart2, val: `${PROJECTS.length}`, label: 'Total Projects' },
             { icon: TrendingUp, val: '300%', label: 'SEO Growth' },
@@ -431,7 +431,7 @@ export default function Projects() {
           ))}
         </Reveal>
 
-        <Reveal className="cta-strip" delay={0.1}>
+        <Reveal className="card cta-strip" delay={0.1}>
           <p>Need a website, SEO roadmap, or a cleaner redesign with stronger conversions?</p>
           <a href="#contact" className="btn btn-primary">
             Start a Conversation <ArrowRight size={17} className="arrow" />
